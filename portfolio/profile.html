@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nampally Vinay Varma - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f8f9fb;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0d6efd;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    header a {
+      color: white;
+      text-decoration: none;
+      font-weight: 300;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    section {
+      margin-bottom: 40px;
+      background: white;
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+      color: #0d6efd;
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    ul {
+      list-style: disc;
+      padding-left: 20px;
+    }
+
+    .project {
+      margin-bottom: 20px;
+    }
+
+    .project-title {
+      font-weight: 600;
+    }
+
+    .project-tech {
+      font-style: italic;
+      color: #555;
+    }
+
+    .key-features {
+      margin-top: 5px;
+      color: #444;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #777;
+    }
+
+    .fade {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
+    }
+
+    .fade.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Nampally Vinay Varma</h1>
+  <a href="mailto:vinayvarma2004@gmail.com">vinayvarma2004@gmail.com</a> |
+  <a href="tel:+916303871238">+91 6303871238</a><br>
+  Hyderabad, India
+</header>
+
+<main>
+  <section class="fade">
+    <h2>Professional Summary</h2>
+    <p><em>Results-oriented achiever with ability to drive success in fast-paced environments. Combines strategic thinking with hands-on experience to deliver impactful solutions and enhance organizational performance.</em></p>
+  </section>
+
+  <section class="fade">
+    <h2>Education</h2>
+    <ul>
+      <li><strong>CMR Engineering College, Hyderabad</strong> – B.Tech (2022 - Present) | CGPA: 8.39</li>
+      <li><strong>Excellencia Junior College</strong> – Intermediate (2020 - 2022) | 98%</li>
+      <li><strong>Narayana Concept School</strong> – High School (2020)</li>
+    </ul>
+  </section>
+
+  <section class="fade">
+    <h2>Skills</h2>
+    <ul>
+      <li>Proficient in Microsoft Word, Excel and PowerPoint</li>
+      <li>Programming Languages: C, Java, HTML, CSS, JavaScript</li>
+      <li>Problem-solving and listening skills</li>
+      <li>Critical thinking and presentation skills</li>
+      <li>Excellent communication and leadership skills</li>
+    </ul>
+  </section>
+
+  <section class="fade">
+    <h2>Projects</h2>
+
+    <div class="project">
+      <p class="project-title">1. Portfolio Website <span class="project-tech">(HTML, CSS)</span></p>
+      <p>Created a responsive portfolio site for freelancers to showcase their work and information.</p>
+      <p class="key-features"><strong>Key Features:</strong> Landing Page, About Page, Responsive Design</p>
+    </div>
+
+    <div class="project">
+      <p class="project-title">2. Donation & Waste Food Management System <span class="project-tech">(SQL, JavaScript, HTML, CSS)</span></p>
+      <p>A web app to collect surplus food and redistribute to people in need.</p>
+      <p class="key-features"><strong>Key Features:</strong> User Auth, Real-time Listing, Food Requests</p>
+    </div>
+
+    <div class="project">
+      <p class="project-title">3. Earthquake Prediction <span class="project-tech">(Python)</span></p>
+      <p>Built ML model to predict earthquakes using datasets and feature engineering.</p>
+      <p class="key-features"><strong>Key Features:</strong> ML Models, Visualization, Predictions</p>
+    </div>
+  </section>
+
+  <section class="fade">
+    <h2>Certifications</h2>
+    <ul>
+      <li>Technical Support Fundamentals by Google (2024)</li>
+      <li>Mastering the Fundamentals of Java – Scaler (2024)</li>
+      <li>Software Engineering Job Simulation – JP Morgan (2024)</li>
+      <li>Essentials Automation Professional – Automation Anywhere (2024)</li>
+    </ul>
+  </section>
+
+  <section class="fade">
+    <h2>Languages</h2>
+    <ul>
+      <li><strong>English:</strong> Advanced</li>
+      <li><strong>Telugu:</strong> Native</li>
+      <li><strong>Hindi:</strong> Bilingual</li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 Nampally Vinay Varma | All rights reserved.
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('.fade');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('show');
+    });
+  }, { threshold: 0.1 });
+
+  sections.forEach(section => observer.observe(section));
+</script>
+
+</body>
+</html>

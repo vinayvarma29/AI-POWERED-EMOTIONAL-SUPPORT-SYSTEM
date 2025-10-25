@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vinay Varma | Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0d6efd;
+      --light: #f8f9fa;
+      --dark: #343a40;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .left, .right {
+      padding: 30px;
+    }
+
+    .left {
+      flex: 1;
+      background: var(--primary);
+      color: white;
+    }
+
+    .right {
+      flex: 2;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: var(--primary);
+      font-size: 20px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+    }
+
+    .title {
+      font-size: 14px;
+      color: #ddd;
+      margin-bottom: 5px;
+    }
+
+    .contact a {
+      color: #ddd;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    .section {
+      margin-bottom: 25px;
+    }
+
+    .fade {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
+    }
+
+    .fade.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .left, .right {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="left">
+    <h1>Vinay Varma</h1>
+    <div class="section contact">
+      <p class="title">Contact</p>
+      <a href="mailto:vinayvarma2004@gmail.com">vinayvarma2004@gmail.com</a>
+      <a href="tel:+916303871238">+91 6303871238</a>
+      <p>Hyderabad, India</p>
+    </div>
+
+    <div class="section">
+      <p class="title">Skills</p>
+      <ul>
+        <li>MS Word, Excel, PowerPoint</li>
+        <li>C, Java, HTML, CSS, JS</li>
+        <li>Problem Solving</li>
+        <li>Critical Thinking</li>
+        <li>Leadership & Communication</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <p class="title">Languages</p>
+      <ul>
+        <li>English – Advanced</li>
+        <li>Telugu – Native</li>
+        <li>Hindi – Bilingual</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <p class="title">Certifications</p>
+      <ul>
+        <li>Google IT Support – 2024</li>
+        <li>Scaler Java Fundamentals – 2024</li>
+        <li>JP Morgan SE Job Sim – 2024</li>
+        <li>Automation Anywhere – 2024</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="section fade">
+      <h2>Professional Summary</h2>
+      <p>Results-oriented achiever with ability to drive success in fast-paced environments. Combines strategic thinking with hands-on experience to deliver impactful solutions and enhance organizational performance.</p>
+    </div>
+
+    <div class="section fade">
+      <h2>Education</h2>
+      <ul>
+        <li><strong>CMR Engineering College</strong> – B.Tech, CGPA: 8.39 (2022 - Present)</li>
+        <li><strong>Excellencia Junior College</strong> – Intermediate, 98% (2020 - 2022)</li>
+        <li><strong>Narayana Concept School</strong> – High School (2020)</li>
+      </ul>
+    </div>
+
+    <div class="section fade">
+      <h2>Projects</h2>
+      <ul>
+        <li>
+          <strong>Portfolio Website</strong> (HTML, CSS) – Responsive site to showcase profile and work.
+        </li>
+        <li>
+          <strong>Food Waste Management System</strong> (SQL, JS, HTML, CSS) – Manages food donation lifecycle with user auth and real-time updates.
+        </li>
+        <li>
+          <strong>Earthquake Prediction</strong> (Python) – ML models for predicting earthquakes from datasets.
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  const fades = document.querySelectorAll('.fade');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('show');
+    });
+  }, { threshold: 0.1 });
+
+  fades.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
