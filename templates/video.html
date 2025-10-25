@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Video Session</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f2f4f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+        }
+        video {
+            border: 10px solid #007bff;
+            border-radius: 20px;
+            width: 640px;
+            height: 480px;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+        canvas {
+            display: none;
+        }
+        #suggestion-box {
+            margin-top: 20px;
+            padding: 15px 20px;
+            max-width: 600px;
+            background-color: #ffffff;
+            border-left: 6px solid #007bff;
+            border-radius: 10px;
+            font-size: 16px;
+            color: #333;
+            display: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        #transcript-box {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h2>Live Emotion Detection (Facial + Voice)</h2>
+
+    <video id="video" autoplay></video>
+    <canvas id="canvas" width="640" height="480"></canvas>
+
+    <button onclick="startEmotionCapture()">Start Analyzing</button>
+    <a href="/emotion_log"><button>View Emotion Log</button></a>
+    <a href="/video"><button>Continue Session</button></a>
+    <a href="/getreport"><button>Get Report</button></a>
+    <a href="/transcript_log">
+    <button style="padding: 10px 20px; font-size: 16px; border-radius: 8px; background-color: #007bff; color: white; border: none;">
+        View Transcript Log
+    </button>
+</a>
+
+
+    <div id="suggestion-box">
+        <strong>Suggestion:</strong> <span id="suggestion-text">Waiting for voice analysis...</span>
+        <div id="transcript-box"></div>
+    </div>
+
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+        const suggestionBox = document.getElementById('suggestion-box');
+        const suggestionText = document.getElementById('suggestion-text');
+        const transcriptBox = document.getElementById('transcript-box');
+
+        let mediaRecorder;
+        let audioChunks = [];
+        let capturing = false;
+
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+            .then(stream => {
+                video.srcObject = stream;
+
+                // Setup audio recorder
+                mediaRecorder = new MediaRecorder(stream);
+                mediaRecorder.ondataavailable = event => {
+                    audioChunks.push(event.data);
+                };
+                mediaRecorder.onstop = () => {
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                    const formData = new FormData();
+                    formData.append('audio', audioBlob, 'recording.wav');
+
+                    fetch('/analyze_voice', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.error) {
+                            suggestionText.textContent = "Could not understand the voice.";
+                            transcriptBox.textContent = '';
+                        } else {
+                            suggestionText.textContent = data.suggestion || "No suggestion.";
+                            transcriptBox.textContent = `"${data.transcript}"`;
+                        }
+                        suggestionBox.style.display = 'block';
+                    })
+                    .catch(err => {
+                        console.error('Voice analysis failed:', err);
+                    });
+
+                    audioChunks = [];
+                };
+            });
+
+        function startEmotionCapture() {
+            if (capturing) return;
+            capturing = true;
+
+            // Facial emotion every 3 sec
+            setInterval(() => {
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                const image_data_url = canvas.toDataURL('image/jpeg');
+
+                fetch('/analyze_emotion', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ image: image_data_url })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Detected Facial Emotion:', data.emotion);
+                })
+                .catch(err => {
+                    console.error('Facial emotion detection failed', err);
+                });
+            }, 3000);
+
+            // Voice transcription + analysis every 6 sec
+            setInterval(() => {
+                if (mediaRecorder && mediaRecorder.state === "inactive") {
+                    mediaRecorder.start();
+                    setTimeout(() => {
+                        mediaRecorder.stop();
+                    }, 4000);
+                }
+            }, 6000);
+        }
+    </script>
+</body>
+</html>

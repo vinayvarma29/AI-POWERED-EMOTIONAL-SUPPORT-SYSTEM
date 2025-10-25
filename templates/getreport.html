@@ -1,0 +1,19 @@
+<!-- templates/getreport.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Psychological Report</title>
+</head>
+<body>
+    <h1>Psychological Report</h1>
+    <form method="POST">
+        <button type="submit">Get Report</button>
+    </form>
+
+    {% if report %}
+        <h2>Generated Report:</h2>
+        <p>{{ report }}</p>
+    {% endif %}
+</body>
+</html>

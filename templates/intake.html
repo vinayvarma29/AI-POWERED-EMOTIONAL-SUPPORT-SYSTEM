@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Psychologist - Intake Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            padding: 40px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 15px;
+            display: block;
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background-color: #2d89ef;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #216db3;
+        }
+        .radio-group {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.radio-group label {
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome to AI Psychologist</h2>
+        <form method="POST" action="/analyze">
+            <label for="reason">1. What brought you here today?</label>
+            <textarea name="reason" required></textarea>
+
+            <label for="mood">2. How would you describe your current mood?</label>
+            <select name="mood" required>
+                <option value="">-- Select --</option>
+                <option value="happy">Happy</option>
+                <option value="anxious">Anxious</option>
+                <option value="sad">Sad</option>
+                <option value="angry">Angry</option>
+                <option value="confused">Confused</option>
+                <option value="neutral">Neutral</option>
+            </select>
+
+            <label for="animal">3. Which animal do you feel most connected to?</label>
+            <select name="animal" required>
+                <option value="">-- Select --</option>
+                <option value="lion">Lion</option>
+                <option value="dolphin">Dolphin</option>
+                <option value="owl">Owl</option>
+                <option value="dog">Dog</option>
+                <option value="cat">Cat</option>
+                <option value="elephant">Elephant</option>
+            </select>
+
+            <label for="struggles">4. What are you struggling with most recently?</label>
+            <textarea name="struggles" required></textarea>
+
+            <label for="symptoms">5. Do you experience any of the following?</label>
+            <select name="symptoms" required>
+                <option value="">-- Select --</option>
+                <option value="anxiety">Anxiety</option>
+                <option value="depression">Depression</option>
+                <option value="stress">Stress</option>
+                <option value="insomnia">Insomnia</option>
+                <option value="none">None of the above</option>
+            </select>
+            <!-- Add this inside your <form> block, before the Submit button -->
+            <label>6. Have you ever been in therapy before?</label>
+<div class="radio-group">
+    <label><input type="radio" name="therapy" value="yes" required> Yes</label>
+    <label><input type="radio" name="therapy" value="no"> No</label>
+</div>
+
+
+
+            <button type="submit">Submit & Begin Session</button>
+        </form>
+    </div>
+</body>
+</html>
